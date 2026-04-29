@@ -8,12 +8,35 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .rule-icon i,
+      .prize-rank i,
+      .prize-div-title i,
+      .ops-item i,
+      .ops-budget h3 i {
+        color: var(--gold);
+        font-size: 1.3rem;
+      }
+      .prize-rank {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 50px;
+      }
+      .prize-rank i {
+        font-size: 1rem;
+      }
+    </style>
   </head>
   <body>
     <!-- NAVBAR -->
     <nav>
-      <a href="index.html" class="logo"> TEKKEN LEAGUE</a>
+      <a href="index.html" class="logo">TEKKEN LEAGUE</a>
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="joueurs.html">Joueurs</a></li>
@@ -54,9 +77,9 @@
 
     <!-- NAVIGATION INTERNE -->
     <div class="inner-nav">
-      <a href="#deroulement">📋 Déroulement</a>
-      <a href="#reglement">📜 Règlement</a>
-      <a href="#prizepool">💰 Prize Pool</a>
+      <a href="#deroulement">Déroulement</a>
+      <a href="#reglement">Règlement</a>
+      <a href="#prizepool">Prize Pool</a>
     </div>
 
     <!-- SECTION DÉROULEMENT -->
@@ -135,7 +158,6 @@
           <div class="phase-content">
             <h3>Journée de Clôture</h3>
             <p class="phase-format">Demi-finales → Finales → Exhibition</p>
-
             <div class="bracket-table-wrap">
               <table class="bracket-table">
                 <thead>
@@ -174,7 +196,6 @@
                 </tbody>
               </table>
             </div>
-
             <div class="promo-relégation">
               <div class="promo-card relegate">
                 <span class="arrow">↓</span>
@@ -210,44 +231,46 @@
 
       <div class="rules-grid">
         <div class="rule-card">
-          <span class="rule-icon">📋</span>
+          <span class="rule-icon"
+            ><i class="fa-solid fa-scale-balanced"></i
+          ></span>
           <span class="rule-label">Règles applicables</span>
           <span class="rule-value">Règles FGC officielles</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">🥊</span>
+          <span class="rule-icon"><i class="fa-solid fa-gamepad"></i></span>
           <span class="rule-label">Sélection de personnage</span>
           <span class="rule-value">Choix libre</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">❌</span>
+          <span class="rule-icon"><i class="fa-solid fa-rotate-left"></i></span>
           <span class="rule-label">En cas de perte</span>
           <span class="rule-value"
             >Le perdant choisit : nouveau perso ou stage aléatoire</span
           >
         </div>
         <div class="rule-card">
-          <span class="rule-icon">⏱️</span>
+          <span class="rule-icon"><i class="fa-solid fa-stopwatch"></i></span>
           <span class="rule-label">Minuteur</span>
           <span class="rule-value">60 secondes par round</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">🔄</span>
+          <span class="rule-icon"><i class="fa-solid fa-repeat"></i></span>
           <span class="rule-label">Rounds par match</span>
           <span class="rule-value">3 rounds</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">🔌</span>
+          <span class="rule-icon"><i class="fa-solid fa-plug"></i></span>
           <span class="rule-label">Connexion</span>
           <span class="rule-value gold">Filaire obligatoire</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">🎮</span>
+          <span class="rule-icon"><i class="fa-solid fa-display"></i></span>
           <span class="rule-label">Version du jeu</span>
           <span class="rule-value">Même version pour tous</span>
         </div>
         <div class="rule-card">
-          <span class="rule-icon">⚖️</span>
+          <span class="rule-icon"><i class="fa-solid fa-gavel"></i></span>
           <span class="rule-label">Arbitrage</span>
           <span class="rule-value"
             >Arbitre désigné pour chaque match playoffs</span
@@ -269,25 +292,35 @@
 
       <div class="prize-container">
         <div class="prize-division">
-          <h3 class="prize-div-title gold">⚔️ Division Élite — D1</h3>
+          <h3 class="prize-div-title gold">
+            <i class="fa-solid fa-sword"></i> Division Élite — D1
+          </h3>
           <div class="prize-list">
             <div class="prize-row first">
-              <span class="prize-rank">🥇 1er</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-trophy"></i> 1er</span
+              >
               <span class="prize-name">Champion Élite</span>
               <span class="prize-amount gold">20 000 FCFA</span>
             </div>
             <div class="prize-row second">
-              <span class="prize-rank">🥈 2e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-medal"></i> 2e</span
+              >
               <span class="prize-name">Vice-Champion Élite</span>
               <span class="prize-amount">15 000 FCFA</span>
             </div>
             <div class="prize-row third">
-              <span class="prize-rank">🥉 3e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-award"></i> 3e</span
+              >
               <span class="prize-name">3e Place Élite</span>
               <span class="prize-amount">10 000 FCFA</span>
             </div>
             <div class="prize-row">
-              <span class="prize-rank">4e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-star"></i> 4e</span
+              >
               <span class="prize-name">4e Place Élite</span>
               <span class="prize-amount">5 000 FCFA</span>
             </div>
@@ -299,25 +332,36 @@
         </div>
 
         <div class="prize-division">
-          <h3 class="prize-div-title silver">🏅 Division Intermédiaire — D2</h3>
+          <h3 class="prize-div-title silver">
+            <i class="fa-solid fa-shield-halved"></i> Division Intermédiaire —
+            D2
+          </h3>
           <div class="prize-list">
             <div class="prize-row first">
-              <span class="prize-rank">🥇 1er</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-trophy"></i> 1er</span
+              >
               <span class="prize-name">Champion Intermédiaire</span>
               <span class="prize-amount gold">15 000 FCFA</span>
             </div>
             <div class="prize-row second">
-              <span class="prize-rank">🥈 2e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-medal"></i> 2e</span
+              >
               <span class="prize-name">Vice-Champion</span>
               <span class="prize-amount">10 000 FCFA</span>
             </div>
             <div class="prize-row third">
-              <span class="prize-rank">🥉 3e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-award"></i> 3e</span
+              >
               <span class="prize-name">3e Place</span>
               <span class="prize-amount">5 000 FCFA</span>
             </div>
             <div class="prize-row">
-              <span class="prize-rank">4e</span>
+              <span class="prize-rank"
+                ><i class="fa-solid fa-star"></i> 4e</span
+              >
               <span class="prize-name">4e Place</span>
               <span class="prize-amount">5 000 FCFA</span>
             </div>
@@ -330,22 +374,34 @@
       </div>
 
       <div class="ops-budget">
-        <h3>📦 Postes Opérationnels</h3>
+        <h3><i class="fa-solid fa-box-open"></i> Postes Opérationnels</h3>
         <div class="ops-grid">
           <div class="ops-item">
-            <span>🏅 Médailles & Récompenses Top 3</span>
+            <span
+              ><i class="fa-solid fa-ribbon"></i> Médailles & Récompenses Top
+              3</span
+            >
             <span>15 000 FCFA</span>
           </div>
           <div class="ops-item">
-            <span>🎮 Forfait Salles de Jeu & Séances</span>
+            <span
+              ><i class="fa-solid fa-building"></i> Forfait Salles de Jeu &
+              Séances</span
+            >
             <span>25 000 FCFA</span>
           </div>
           <div class="ops-item">
-            <span>🎥 Production Vidéo & Diffusion</span>
+            <span
+              ><i class="fa-solid fa-video"></i> Production Vidéo &
+              Diffusion</span
+            >
             <span>10 000 FCFA</span>
           </div>
           <div class="ops-item">
-            <span>⚠️ Provisions pour Imprévus</span>
+            <span
+              ><i class="fa-solid fa-triangle-exclamation"></i> Provisions pour
+              Imprévus</span
+            >
             <span>15 000 FCFA</span>
           </div>
           <div class="ops-total">
@@ -358,7 +414,10 @@
 
     <!-- FOOTER -->
     <footer>
-      <p>⚔️ <strong>Tekken League</strong> — Compétition locale officielle</p>
+      <p>
+        <i class="fa-solid fa-swords" style="color: var(--gold)"></i>
+        <strong>Tekken League</strong> — Compétition locale officielle
+      </p>
       <p class="footer-sub">Tekken 8 · Règles FGC · 20 joueurs · 2 divisions</p>
       <p style="color: #c9a84c">
         © 2026 Kuro-Exodus — Tekken League. Tous droits réservés.
