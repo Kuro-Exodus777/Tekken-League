@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joueurs — Tekken League</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #c9a84c;
+        --gold-light: #e8c96a;
+        --gold-dim: #7a6230;
+        --black: #0a0a0a;
+        --black-card: #111111;
+        --black-mid: #1a1a1a;
+        --white: #f0ece0;
+        --grey: #888;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--black);
+        color: var(--white);
+        font-family: "Rajdhani", sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(10, 10, 10, 0.95);
+        border-bottom: 1px solid var(--gold-dim);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.5rem;
+        height: 60px;
+        backdrop-filter: blur(8px);
+      }
+
+      .nav-logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
+        color: var(--gold);
+        letter-spacing: 3px;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--grey);
+        text-decoration: none;
+        transition: color 0.25s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--gold);
+      }
+
+      /* ── INTRO OVERLAY ── */
+      #intro-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: var(--black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        animation: fadeOutOverlay 0.6s ease 2.8s forwards;
+        pointer-events: none;
+      }
+
+      #intro-overlay .intro-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(3rem, 8vw, 7rem);
+        color: var(--gold);
+        letter-spacing: 8px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideUp 0.7s ease 0.2s forwards;
+      }
+
+      #intro-overlay .intro-sub {
+        font-family: "Share Tech Mono", monospace;
+        font-size: clamp(0.85rem, 2vw, 1.1rem);
+        color: var(--grey);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 1s forwards;
+      }
+
+      #intro-overlay .intro-line {
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        animation: expandLine 0.8s ease 0.7s forwards;
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes expandLine {
+        to {
+          width: 220px;
+        }
+      }
+      @keyframes fadeOutOverlay {
+        to {
+          opacity: 0;
+          pointer-events: none;
+          visibility: hidden;
+        }
+      }
+
+      /* ── HERO ── */
+      .page-hero {
+        padding: 5rem 2.5rem 3rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, transparent, var(--gold-dim));
+      }
+
+      .page-hero h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(3rem, 7vw, 6rem);
+        color: var(--gold);
+        letter-spacing: 6px;
+        line-height: 1;
+      }
+
+      .page-hero p {
+        margin-top: 1rem;
+        font-size: 1.05rem;
+        color: var(--grey);
+        letter-spacing: 1px;
+        max-width: 560px;
+        margin-inline: auto;
+        line-height: 1.7;
+      }
+
+      /* ── SECTION TITRE DIVISION ── */
+      .section-division {
+        padding: 3rem 2.5rem 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .division-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .division-header h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: 5px;
+        white-space: nowrap;
+      }
+
+      .d1-title {
+        color: var(--gold);
+      }
+      .d2-title {
+        color: #aaa;
+      }
+
+      .division-header .badge {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        padding: 4px 10px;
+        border-radius: 2px;
+        text-transform: uppercase;
+      }
+
+      .badge-elite {
+        background: var(--gold-dim);
+        color: var(--gold-light);
+        border: 1px solid var(--gold);
+      }
+
+      .badge-inter {
+        background: #222;
+        color: #aaa;
+        border: 1px solid #444;
+      }
+
+      .division-header .line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, currentColor, transparent);
+        opacity: 0.3;
+      }
+
+      /* ── TABLE ── */
+      .table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 4rem;
+        border: 1px solid var(--gold-dim);
+        border-radius: 4px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Rajdhani", sans-serif;
+      }
+
+      thead tr {
+        background: #141414;
+      }
+
+      thead th {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold-dim);
+        padding: 14px 20px;
+        text-align: left;
+        border-bottom: 1px solid var(--gold-dim);
+        white-space: nowrap;
+      }
+
+      thead th:first-child {
+        color: var(--gold);
+        width: 50px;
+        text-align: center;
+      }
+
+      tbody tr {
+        border-bottom: 1px solid #1e1e1e;
+        transition: background 0.2s;
+      }
+
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background: #161610;
+      }
+
+      tbody td {
+        padding: 14px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--white);
+        vertical-align: middle;
+      }
+
+      tbody td:first-child {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--gold-dim);
+        text-align: center;
+        font-weight: 400;
+      }
+
+      /* Colonne pseudo */
+      .pseudo-cell {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.15rem;
+        letter-spacing: 2px;
+        color: var(--gold-light) !important;
+      }
+
+      .d2-table .pseudo-cell {
+        color: var(--white) !important;
+      }
+
+      /* Colonnes perso */
+      .char-cell {
+        font-size: 0.9rem;
+        color: #bbb !important;
+        font-weight: 400;
+      }
+
+      .char-cell.main {
+        color: var(--white) !important;
+        font-weight: 700;
+      }
+
+      /* Colonne points forts */
+      .strengths-cell {
+        font-size: 0.88rem;
+        color: var(--grey) !important;
+        font-style: italic;
+        font-weight: 400;
+        min-width: 180px;
+      }
+
+      /* séparateur entre sections */
+      .section-sep {
+        max-width: 1200px;
+        margin: 0 auto 1rem;
+        padding: 0 2.5rem;
+      }
+
+      .section-sep hr {
+        border: none;
+        border-top: 1px solid #1e1e1e;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid #1a1a1a;
+        margin-top: 2rem;
+      }
+
+      footer p {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--gold-dim);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+      <div class="intro-title">LES JOUEURS</div>
+      <div class="intro-line"></div>
+      <div class="intro-sub">20 combattants · 2 divisions · 1 championnat</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+      <a href="index.html" class="nav-logo">Tekken League</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="joueurs.html" class="active">Joueurs</a></li>
+        <li><a href="classement.html">Classement</a></li>
+        <li><a href="matchs.html">Matchs</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+      <h1>Les Joueurs</h1>
+      <p>
+        20 combattants répartis en deux divisions. La Division 1 regroupe
+        l'élite de la ligue, la Division 2 les challengers prêts à monter.
+      </p>
+    </section>
+
+    <!-- DIVISION 1 -->
+    <section class="section-division">
+      <div class="division-header">
+        <h2 class="d1-title">Division 1</h2>
+        <span class="badge badge-elite">Élite</span>
+        <div class="line" style="color: var(--gold)"></div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="d1-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Pseudo</th>
+              <th>Main</th>
+              <th>2e Perso</th>
+              <th>3e Perso</th>
+              <th>Points Forts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td class="pseudo-cell">Kuro-Exodus</td>
+              <td class="char-cell main">Dragunov</td>
+              <td class="char-cell">Lars</td>
+              <td class="char-cell">Mokujin</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td class="pseudo-cell">Mood</td>
+              <td class="char-cell main">Yoshimitsu</td>
+              <td class="char-cell">Asuka</td>
+              <td class="char-cell">Feng</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td class="pseudo-cell">Aquila</td>
+              <td class="char-cell main">Azucena</td>
+              <td class="char-cell">King</td>
+              <td class="char-cell">Shaheen</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td class="pseudo-cell">Geek</td>
+              <td class="char-cell main">Dragunov</td>
+              <td class="char-cell">Nina</td>
+              <td class="char-cell">Clive</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td class="pseudo-cell">LeBron James</td>
+              <td class="char-cell main">Panda</td>
+              <td class="char-cell">Kuma</td>
+              <td class="char-cell">Bryan</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td class="pseudo-cell">White</td>
+              <td class="char-cell main">Jack-8</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>07</td>
+              <td class="pseudo-cell">Darwin</td>
+              <td class="char-cell main">Bryan</td>
+              <td class="char-cell">Claudio</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>08</td>
+              <td class="pseudo-cell">King</td>
+              <td class="char-cell main">King</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>09</td>
+              <td class="pseudo-cell">Itachi_228</td>
+              <td class="char-cell main">Yoshimitsu</td>
+              <td class="char-cell">Leroy</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td class="pseudo-cell">Allmight</td>
+              <td class="char-cell main">King</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-sep"><hr /></div>
+
+    <!-- DIVISION 2 -->
+    <section class="section-division">
+      <div class="division-header">
+        <h2 class="d2-title">Division 2</h2>
+        <span class="badge badge-inter">Intermédiaire</span>
+        <div class="line" style="color: #666"></div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="d2-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Pseudo</th>
+              <th>Main</th>
+              <th>2e Perso</th>
+              <th>3e Perso</th>
+              <th>Points Forts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td class="pseudo-cell">Eclairomax</td>
+              <td class="char-cell main">Leroy</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td class="pseudo-cell">CBlacks</td>
+              <td class="char-cell main">Jun Kazama</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td class="pseudo-cell">Nacho</td>
+              <td class="char-cell main">—</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td class="pseudo-cell">Livingstone</td>
+              <td class="char-cell main">—</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td class="pseudo-cell">Dan</td>
+              <td class="char-cell main">Hwoarang</td>
+              <td class="char-cell">—</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>06</td>
+              <td class="pseudo-cell">Gargos</td>
+              <td class="char-cell main">Xiaoyu</td>
+              <td class="char-cell">Hwoarang</td>
+              <td class="char-cell">Paul</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>07</td>
+              <td class="pseudo-cell">Kami</td>
+              <td class="char-cell main">Lili</td>
+              <td class="char-cell">Xiaoyu</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>08</td>
+              <td class="pseudo-cell">Beckham</td>
+              <td class="char-cell main">Law</td>
+              <td class="char-cell">Jun</td>
+              <td class="char-cell">—</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>09</td>
+              <td class="pseudo-cell">Warrax</td>
+              <td class="char-cell main">Leo</td>
+              <td class="char-cell">Eddy</td>
+              <td class="char-cell">Mokujin</td>
+              <td class="strengths-cell"></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td class="pseudo-cell">Dave'l</td>
+              <td class="char-cell main">Jin</td>
+              <td class="char-cell">Bryan</td>
+              <td class="char-cell">Paul</td>
+              <td class="strengths-cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Kuro-Exodus — Tekken League. Tous droits réservés.</p>
+    </footer>
+  </body>
+</html>

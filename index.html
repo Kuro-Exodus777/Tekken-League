@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tekken League</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="index.html" class="logo"> TEKKEN LEAGUE</a>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="joueurs.html">Joueurs</a></li>
+        <li><a href="classement.html">Classement</a></li>
+        <li><a href="matchs.html">Matchs</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg-text">TEKKEN</div>
+      <div class="hero-content">
+        <div class="hero-badge">SAISON 1 — OFFICIELLE</div>
+        <h1 class="hero-title">TEKKEN<span class="gold">LEAGUE</span></h1>
+        <p class="hero-subtitle">20 joueurs. 2 divisions. 1 champion.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">20</span>
+            <span class="stat-label">Joueurs</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Divisions</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">150K</span>
+            <span class="stat-label">FCFA Prize Pool</span>
+          </div>
+        </div>
+        <div class="hero-links">
+          <a href="#deroulement" class="btn-primary">Voir le programme</a>
+          <a href="#reglement" class="btn-outline">Règlement officiel</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION INTERNE -->
+    <div class="inner-nav">
+      <a href="#deroulement">📋 Déroulement</a>
+      <a href="#reglement">📜 Règlement</a>
+      <a href="#prizepool">💰 Prize Pool</a>
+    </div>
+
+    <!-- SECTION DÉROULEMENT -->
+    <section class="section" id="deroulement">
+      <div class="section-header">
+        <span class="section-tag">Programme officiel</span>
+        <h2 class="section-title">
+          DÉROULEMENT <span class="gold">DE LA LIGUE</span>
+        </h2>
+        <p class="section-desc">
+          La compétition se déroule en trois phases distinctes, du tournoi de
+          qualification jusqu'à la grande finale.
+        </p>
+      </div>
+
+      <div class="phases">
+        <!-- PHASE 1 -->
+        <div class="phase-card">
+          <div class="phase-number">01</div>
+          <div class="phase-content">
+            <h3>Qualifications</h3>
+            <p class="phase-format">
+              Format double élimination — Tournoi ouvert
+            </p>
+            <p>
+              Le tournoi d'accès détermine la composition des deux divisions
+              pour la saison régulière. Les 10 premiers intègrent la
+              <span class="gold">Division Élite</span>, les 10 suivants
+              rejoignent la <span class="silver">Division Intermédiaire</span>.
+            </p>
+            <div class="phase-tags">
+              <span class="tag">Double Élimination</span>
+              <span class="tag">20 Participants</span>
+              <span class="tag">Classement définitif</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="phase-card">
+          <div class="phase-number">02</div>
+          <div class="phase-content">
+            <h3>Saison Régulière</h3>
+            <p class="phase-format">3 à 4 semaines — Round Robin</p>
+            <p>
+              Chaque joueur affronte tous les autres joueurs de sa division. Les
+              <strong>4 premiers</strong> de chaque division se qualifient pour
+              les phases finales.
+            </p>
+            <div class="phase-grid">
+              <div class="phase-div gold-border">
+                <strong class="gold">D1 — Élite</strong>
+                <ul>
+                  <li>10 joueurs</li>
+                  <li>9 matchs / joueur</li>
+                  <li>Format Bo3</li>
+                  <li>Top 4 → Playoffs</li>
+                </ul>
+              </div>
+              <div class="phase-div silver-border">
+                <strong class="silver">D2 — Intermédiaire</strong>
+                <ul>
+                  <li>10 joueurs</li>
+                  <li>9 matchs / joueur</li>
+                  <li>Format Bo3</li>
+                  <li>Top 4 → Playoffs</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 3 -->
+        <div class="phase-card">
+          <div class="phase-number">03</div>
+          <div class="phase-content">
+            <h3>Journée de Clôture</h3>
+            <p class="phase-format">Demi-finales → Finales → Exhibition</p>
+
+            <div class="bracket-table-wrap">
+              <table class="bracket-table">
+                <thead>
+                  <tr>
+                    <th>Division</th>
+                    <th>Affrontement</th>
+                    <th>Format</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="gold">D1 Demi-finales</span></td>
+                    <td>Seed 1 vs 4 · Seed 2 vs 3</td>
+                    <td><span class="tag">Bo9</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="silver">D2 Demi-finales</span></td>
+                    <td>Seed 1 vs 4 · Seed 2 vs 3</td>
+                    <td><span class="tag">Bo3</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="gold">D1 Finale</span></td>
+                    <td>Les 2 vainqueurs D1</td>
+                    <td><span class="tag tag-gold">Bo13</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="silver">D2 Finale</span></td>
+                    <td>Les 2 vainqueurs D2</td>
+                    <td><span class="tag">Bo5</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="exhibition">Exhibition</span></td>
+                    <td>Champion D1 vs Champion D2</td>
+                    <td><span class="tag tag-dim">Bo3 — Symbolique</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="promo-relégation">
+              <div class="promo-card relegate">
+                <span class="arrow">↓</span>
+                <div>
+                  <strong>Relégation D1 → D2</strong>
+                  <p>Les 2 derniers de la Division Élite descendent</p>
+                </div>
+              </div>
+              <div class="promo-card promote">
+                <span class="arrow">↑</span>
+                <div>
+                  <strong>Promotion D2 → D1</strong>
+                  <p>Les 2 premiers de la Division Intermédiaire montent</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION RÈGLEMENT -->
+    <section class="section section-dark" id="reglement">
+      <div class="section-header">
+        <span class="section-tag">Compétition officielle</span>
+        <h2 class="section-title">
+          RÈGLEMENT <span class="gold">OFFICIEL</span>
+        </h2>
+        <p class="section-desc">
+          Toutes les règles applicables lors des matchs de la Tekken League.
+        </p>
+      </div>
+
+      <div class="rules-grid">
+        <div class="rule-card">
+          <span class="rule-icon">📋</span>
+          <span class="rule-label">Règles applicables</span>
+          <span class="rule-value">Règles FGC officielles</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">🥊</span>
+          <span class="rule-label">Sélection de personnage</span>
+          <span class="rule-value">Choix libre</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">❌</span>
+          <span class="rule-label">En cas de perte</span>
+          <span class="rule-value"
+            >Le perdant choisit : nouveau perso ou stage aléatoire</span
+          >
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">⏱️</span>
+          <span class="rule-label">Minuteur</span>
+          <span class="rule-value">60 secondes par round</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">🔄</span>
+          <span class="rule-label">Rounds par match</span>
+          <span class="rule-value">3 rounds</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">🔌</span>
+          <span class="rule-label">Connexion</span>
+          <span class="rule-value gold">Filaire obligatoire</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">🎮</span>
+          <span class="rule-label">Version du jeu</span>
+          <span class="rule-value">Même version pour tous</span>
+        </div>
+        <div class="rule-card">
+          <span class="rule-icon">⚖️</span>
+          <span class="rule-label">Arbitrage</span>
+          <span class="rule-value"
+            >Arbitre désigné pour chaque match playoffs</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION PRIZE POOL -->
+    <section class="section" id="prizepool">
+      <div class="section-header">
+        <span class="section-tag">Récompenses</span>
+        <h2 class="section-title">PRIZE <span class="gold">POOL</span></h2>
+        <p class="section-desc">
+          Budget total alloué : <strong class="gold">150 000 FCFA</strong> —
+          réparti entre les performances des deux divisions.
+        </p>
+      </div>
+
+      <div class="prize-container">
+        <div class="prize-division">
+          <h3 class="prize-div-title gold">⚔️ Division Élite — D1</h3>
+          <div class="prize-list">
+            <div class="prize-row first">
+              <span class="prize-rank">🥇 1er</span>
+              <span class="prize-name">Champion Élite</span>
+              <span class="prize-amount gold">20 000 FCFA</span>
+            </div>
+            <div class="prize-row second">
+              <span class="prize-rank">🥈 2e</span>
+              <span class="prize-name">Vice-Champion Élite</span>
+              <span class="prize-amount">15 000 FCFA</span>
+            </div>
+            <div class="prize-row third">
+              <span class="prize-rank">🥉 3e</span>
+              <span class="prize-name">3e Place Élite</span>
+              <span class="prize-amount">10 000 FCFA</span>
+            </div>
+            <div class="prize-row">
+              <span class="prize-rank">4e</span>
+              <span class="prize-name">4e Place Élite</span>
+              <span class="prize-amount">5 000 FCFA</span>
+            </div>
+            <div class="prize-subtotal">
+              <span>Sous-total D1</span>
+              <span class="gold">50 000 FCFA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="prize-division">
+          <h3 class="prize-div-title silver">🏅 Division Intermédiaire — D2</h3>
+          <div class="prize-list">
+            <div class="prize-row first">
+              <span class="prize-rank">🥇 1er</span>
+              <span class="prize-name">Champion Intermédiaire</span>
+              <span class="prize-amount gold">15 000 FCFA</span>
+            </div>
+            <div class="prize-row second">
+              <span class="prize-rank">🥈 2e</span>
+              <span class="prize-name">Vice-Champion</span>
+              <span class="prize-amount">10 000 FCFA</span>
+            </div>
+            <div class="prize-row third">
+              <span class="prize-rank">🥉 3e</span>
+              <span class="prize-name">3e Place</span>
+              <span class="prize-amount">5 000 FCFA</span>
+            </div>
+            <div class="prize-row">
+              <span class="prize-rank">4e</span>
+              <span class="prize-name">4e Place</span>
+              <span class="prize-amount">5 000 FCFA</span>
+            </div>
+            <div class="prize-subtotal">
+              <span>Sous-total D2</span>
+              <span class="silver">35 000 FCFA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ops-budget">
+        <h3>📦 Postes Opérationnels</h3>
+        <div class="ops-grid">
+          <div class="ops-item">
+            <span>🏅 Médailles & Récompenses Top 3</span>
+            <span>15 000 FCFA</span>
+          </div>
+          <div class="ops-item">
+            <span>🎮 Forfait Salles de Jeu & Séances</span>
+            <span>25 000 FCFA</span>
+          </div>
+          <div class="ops-item">
+            <span>🎥 Production Vidéo & Diffusion</span>
+            <span>10 000 FCFA</span>
+          </div>
+          <div class="ops-item">
+            <span>⚠️ Provisions pour Imprévus</span>
+            <span>15 000 FCFA</span>
+          </div>
+          <div class="ops-total">
+            <span>BUDGET TOTAL</span>
+            <span class="gold">150 000 FCFA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>⚔️ <strong>Tekken League</strong> — Compétition locale officielle</p>
+      <p class="footer-sub">Tekken 8 · Règles FGC · 20 joueurs · 2 divisions</p>
+      <p style="color: #c9a84c">
+        © 2026 Kuro-Exodus — Tekken League. Tous droits réservés.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

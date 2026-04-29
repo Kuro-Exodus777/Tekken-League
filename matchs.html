@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matchs — Tekken League</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .nav-logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
+        color: #c9a84c;
+        letter-spacing: 3px;
+        text-decoration: none;
+      }
+      .page-hero {
+        padding: 5rem 2.5rem 3rem;
+        text-align: center;
+        position: relative;
+      }
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, transparent, #7a6230);
+      }
+      .page-hero h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(3rem, 7vw, 6rem);
+        color: #c9a84c;
+        letter-spacing: 6px;
+        line-height: 1;
+      }
+      .page-hero p {
+        margin-top: 1rem;
+        font-size: 1.05rem;
+        color: #888;
+        letter-spacing: 1px;
+        max-width: 560px;
+        margin-inline: auto;
+        line-height: 1.7;
+      }
+
+      /* ── TABLEAUX CROISÉS ── */
+      .cross-section {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+      }
+
+      .cross-division-block {
+        margin-bottom: 4rem;
+      }
+
+      .cross-division-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .cross-division-header h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        letter-spacing: 4px;
+        white-space: nowrap;
+      }
+
+      .d1-title {
+        color: #c9a84c;
+      }
+      .d2-title {
+        color: #aaa;
+      }
+
+      .badge {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        padding: 4px 10px;
+        border-radius: 2px;
+        text-transform: uppercase;
+      }
+      .badge-elite {
+        background: #3a2e10;
+        color: #e8c96a;
+        border: 1px solid #c9a84c;
+      }
+      .badge-inter {
+        background: #1e1e1e;
+        color: #aaa;
+        border: 1px solid #444;
+      }
+
+      .div-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, currentColor, transparent);
+        opacity: 0.2;
+      }
+
+      .cross-table-wrap {
+        overflow-x: auto;
+        border: 1px solid #2a2a2a;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .cross-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Rajdhani", sans-serif;
+        min-width: 900px;
+      }
+
+      /* En-têtes colonnes */
+      .cross-table th {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #7a6230;
+        padding: 10px 6px;
+        text-align: center;
+        border-bottom: 1px solid #2a2a2a;
+        border-right: 1px solid #1e1e1e;
+        white-space: nowrap;
+        background: #0f0f0f;
+      }
+
+      .cross-table th.row-header {
+        text-align: left;
+        color: #c9a84c;
+        padding-left: 14px;
+        min-width: 140px;
+        font-size: 0.55rem;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+      }
+
+      /* Cellules */
+      .cross-table td {
+        padding: 0;
+        border-bottom: 1px solid #181818;
+        border-right: 1px solid #1a1a1a;
+        text-align: center;
+        vertical-align: middle;
+        height: 44px;
+      }
+
+      .cross-table td.player-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+        color: #e8c96a;
+        padding: 10px 14px;
+        text-align: left;
+        background: #0f0f0f;
+        border-right: 1px solid #2a2a2a;
+        white-space: nowrap;
+        position: sticky;
+        left: 0;
+        z-index: 1;
+      }
+
+      .d2-block .cross-table td.player-name {
+        color: #ddd;
+      }
+
+      /* Case identique (non cliquable) */
+      .cell-self {
+        background: #080808;
+        cursor: not-allowed;
+      }
+
+      .cross-icon {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.85rem;
+        color: #2a2a2a;
+        user-select: none;
+      }
+
+      /* Case score cliquable */
+      .cell-score {
+        cursor: pointer;
+        min-width: 60px;
+        transition: background 0.2s;
+      }
+
+      .cell-score:hover {
+        background: #1a1608;
+      }
+
+      .cell-score.filled {
+        background: #0d0d08;
+      }
+
+      .score-display {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #3a3a3a;
+        line-height: 1;
+        pointer-events: none;
+        display: block;
+      }
+
+      .score-display.win {
+        color: #4caf78;
+      }
+      .score-display.loss {
+        color: #c04040;
+      }
+      .score-display.draw {
+        color: #c9a84c;
+      }
+
+      /* ── MODAL ── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      .modal {
+        background: #111;
+        border: 1px solid #c9a84c;
+        padding: 2rem;
+        min-width: 320px;
+        max-width: 420px;
+        width: 90%;
+        position: relative;
+      }
+
+      .modal-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+        color: #c9a84c;
+        margin-bottom: 0.3rem;
+        text-align: center;
+      }
+
+      .modal-subtitle {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.62rem;
+        color: #555;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-bottom: 1.8rem;
+        text-transform: uppercase;
+      }
+
+      .modal-matchup {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .modal-player {
+        flex: 1;
+        text-align: center;
+      }
+
+      .modal-player-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.05rem;
+        letter-spacing: 2px;
+        color: #e8c96a;
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+
+      .score-btns {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+      }
+
+      .score-btn {
+        width: 40px;
+        height: 40px;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        color: #aaa;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.15s;
+        border-radius: 2px;
+      }
+      .score-btn:hover {
+        border-color: #c9a84c;
+        color: #c9a84c;
+      }
+      .score-btn.selected {
+        background: #c9a84c;
+        border-color: #c9a84c;
+        color: #000;
+      }
+
+      .modal-vs {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.7rem;
+        color: #444;
+        letter-spacing: 2px;
+        flex-shrink: 0;
+      }
+
+      .modal-error {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.68rem;
+        color: #c04040;
+        text-align: center;
+        min-height: 1.1rem;
+        margin-bottom: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-confirm {
+        background: #c9a84c;
+        color: #000;
+        border: none;
+        padding: 10px 28px;
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-confirm:hover {
+        background: #e8c96a;
+      }
+
+      .btn-cancel {
+        background: transparent;
+        color: #555;
+        border: 1px solid #333;
+        padding: 10px 20px;
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-cancel:hover {
+        border-color: #555;
+        color: #888;
+      }
+
+      .btn-reset {
+        background: transparent;
+        color: #c04040;
+        border: 1px solid #5a2020;
+        padding: 10px 20px;
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-reset:hover {
+        border-color: #c04040;
+        color: #e05050;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        background: none;
+        border: none;
+        color: #555;
+        font-size: 1.2rem;
+        cursor: pointer;
+        font-family: "Share Tech Mono", monospace;
+        transition: color 0.2s;
+      }
+      .modal-close:hover {
+        color: #c9a84c;
+      }
+
+      /* ── MATCHS PAR TOUR ── */
+      .matchs-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+      }
+
+      .tours-section-title {
+        max-width: 1100px;
+        margin: 0 auto 2rem;
+        padding: 0 2rem;
+      }
+      .tours-section-title h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        letter-spacing: 4px;
+        color: #444;
+      }
+
+      .division-tabs {
+        display: flex;
+        border-bottom: 1px solid #2a2a2a;
+        margin-bottom: 3rem;
+      }
+      .tab-btn {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+        padding: 1rem 2.5rem;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        color: #555;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .tab-btn:hover {
+        color: #888;
+      }
+      .tab-btn.active {
+        color: #c9a84c;
+        border-bottom-color: #c9a84c;
+      }
+
+      .division-panel {
+        display: none;
+      }
+      .division-panel.active {
+        display: block;
+      }
+
+      .tour-block {
+        margin-bottom: 2.5rem;
+      }
+      .tour-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .tour-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #7a6230;
+        white-space: nowrap;
+      }
+      .tour-line {
+        flex: 1;
+        height: 1px;
+        background: #1e1e1e;
+      }
+      .tour-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1rem;
+        color: #333;
+      }
+
+      .matchs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .match-card {
+        background: #111;
+        border: 1px solid #1e1e1e;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.85rem 1.2rem;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .match-card:hover {
+        border-color: #3a3020;
+        background: #141208;
+      }
+      .match-card .player {
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        color: #e8c96a;
+        flex: 1;
+      }
+      .match-card .player.right {
+        text-align: right;
+        color: #d0b85a;
+      }
+      .match-card .vs {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.65rem;
+        color: #444;
+        letter-spacing: 2px;
+        padding: 0 0.75rem;
+        flex-shrink: 0;
+      }
+
+      .section-sep {
+        border: none;
+        border-top: 1px solid #1a1a1a;
+        max-width: 1300px;
+        margin: 0 auto 3rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid #1a1a1a;
+      }
+      footer p {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 0.75rem;
+        color: #7a6230;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body data-page="matchs">
+    <nav>
+      <a href="index.html" class="nav-logo">Tekken League</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="joueurs.html">Joueurs</a></li>
+        <li><a href="classement.html">Classement</a></li>
+        <li><a href="matchs.html" class="active">Matchs</a></li>
+      </ul>
+    </nav>
+
+    <section class="page-hero">
+      <h1>Matchs</h1>
+      <p>
+        Saison régulière — Round Robin. Clique sur une case du tableau pour
+        reporter un résultat.
+      </p>
+    </section>
+
+    <!-- ═══ TABLEAUX CROISÉS ═══ -->
+    <div class="cross-section">
+      <!-- D1 -->
+      <div class="cross-division-block" id="cross-d1">
+        <div class="cross-division-header">
+          <h2 class="d1-title">Division 1</h2>
+          <span class="badge badge-elite">Élite</span>
+          <div class="div-line" style="color: #c9a84c"></div>
+        </div>
+        <div class="cross-table-wrap">
+          <table class="cross-table" id="table-d1">
+            <thead>
+              <tr>
+                <th class="row-header">↓ vs →</th>
+                <th>Kuro-Exodus</th>
+                <th>Mood</th>
+                <th>Aquila</th>
+                <th>Geek</th>
+                <th>LeBron James</th>
+                <th>White</th>
+                <th>Darwin</th>
+                <th>King</th>
+                <th>Itachi_228</th>
+                <th>Allmight</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-d1"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr class="section-sep" />
+
+      <!-- D2 -->
+      <div class="cross-division-block d2-block" id="cross-d2">
+        <div class="cross-division-header">
+          <h2 class="d2-title">Division 2</h2>
+          <span class="badge badge-inter">Intermédiaire</span>
+          <div class="div-line" style="color: #666"></div>
+        </div>
+        <div class="cross-table-wrap">
+          <table class="cross-table" id="table-d2">
+            <thead>
+              <tr>
+                <th class="row-header">↓ vs →</th>
+                <th>Eclairomax</th>
+                <th>CBlacks</th>
+                <th>Nacho</th>
+                <th>Livingstone</th>
+                <th>Dan</th>
+                <th>Gargos</th>
+                <th>Kami</th>
+                <th>Beckham</th>
+                <th>Warrax</th>
+                <th>Dave'l</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-d2"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-sep" />
+
+    <div class="tours-section-title">
+      <h2>Calendrier des Tours</h2>
+    </div>
+
+    <div class="matchs-container">
+      <div class="division-tabs">
+        <button class="tab-btn active" onclick="showDiv('d1', event)">
+          Division 1 — Élite
+        </button>
+        <button class="tab-btn" onclick="showDiv('d2', event)">
+          Division 2 — Intermédiaire
+        </button>
+      </div>
+
+      <!-- D1 TOURS -->
+      <div id="panel-d1" class="division-panel active">
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">01</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Allmight</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Mood</span><span class="vs">vs</span
+              ><span class="player right">Itachi_228</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Aquila</span><span class="vs">vs</span
+              ><span class="player right">King</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Geek</span><span class="vs">vs</span
+              ><span class="player right">Darwin</span>
+            </div>
+            <div class="match-card">
+              <span class="player">LeBron James</span><span class="vs">vs</span
+              ><span class="player right">White</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">02</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Itachi_228</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Allmight</span><span class="vs">vs</span
+              ><span class="player right">King</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Mood</span><span class="vs">vs</span
+              ><span class="player right">Darwin</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Aquila</span><span class="vs">vs</span
+              ><span class="player right">White</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Geek</span><span class="vs">vs</span
+              ><span class="player right">LeBron James</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">03</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">King</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Itachi_228</span><span class="vs">vs</span
+              ><span class="player right">Darwin</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Allmight</span><span class="vs">vs</span
+              ><span class="player right">White</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Mood</span><span class="vs">vs</span
+              ><span class="player right">LeBron James</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Aquila</span><span class="vs">vs</span
+              ><span class="player right">Geek</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">04</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Darwin</span>
+            </div>
+            <div class="match-card">
+              <span class="player">King</span><span class="vs">vs</span
+              ><span class="player right">White</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Itachi_228</span><span class="vs">vs</span
+              ><span class="player right">LeBron James</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Allmight</span><span class="vs">vs</span
+              ><span class="player right">Geek</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Mood</span><span class="vs">vs</span
+              ><span class="player right">Aquila</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">05</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">White</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Darwin</span><span class="vs">vs</span
+              ><span class="player right">LeBron James</span>
+            </div>
+            <div class="match-card">
+              <span class="player">King</span><span class="vs">vs</span
+              ><span class="player right">Geek</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Itachi_228</span><span class="vs">vs</span
+              ><span class="player right">Aquila</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Allmight</span><span class="vs">vs</span
+              ><span class="player right">Mood</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">06</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">LeBron James</span>
+            </div>
+            <div class="match-card">
+              <span class="player">White</span><span class="vs">vs</span
+              ><span class="player right">Geek</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Darwin</span><span class="vs">vs</span
+              ><span class="player right">Aquila</span>
+            </div>
+            <div class="match-card">
+              <span class="player">King</span><span class="vs">vs</span
+              ><span class="player right">Mood</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Itachi_228</span><span class="vs">vs</span
+              ><span class="player right">Allmight</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">07</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Geek</span>
+            </div>
+            <div class="match-card">
+              <span class="player">LeBron James</span><span class="vs">vs</span
+              ><span class="player right">Aquila</span>
+            </div>
+            <div class="match-card">
+              <span class="player">White</span><span class="vs">vs</span
+              ><span class="player right">Mood</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Darwin</span><span class="vs">vs</span
+              ><span class="player right">Allmight</span>
+            </div>
+            <div class="match-card">
+              <span class="player">King</span><span class="vs">vs</span
+              ><span class="player right">Itachi_228</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">08</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Aquila</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Geek</span><span class="vs">vs</span
+              ><span class="player right">Mood</span>
+            </div>
+            <div class="match-card">
+              <span class="player">LeBron James</span><span class="vs">vs</span
+              ><span class="player right">Allmight</span>
+            </div>
+            <div class="match-card">
+              <span class="player">White</span><span class="vs">vs</span
+              ><span class="player right">Itachi_228</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Darwin</span><span class="vs">vs</span
+              ><span class="player right">King</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">09</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Kuro-Exodus</span><span class="vs">vs</span
+              ><span class="player right">Mood</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Aquila</span><span class="vs">vs</span
+              ><span class="player right">Allmight</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Geek</span><span class="vs">vs</span
+              ><span class="player right">Itachi_228</span>
+            </div>
+            <div class="match-card">
+              <span class="player">LeBron James</span><span class="vs">vs</span
+              ><span class="player right">King</span>
+            </div>
+            <div class="match-card">
+              <span class="player">White</span><span class="vs">vs</span
+              ><span class="player right">Darwin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- D2 TOURS -->
+      <div id="panel-d2" class="division-panel">
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">01</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Dave'l</span>
+            </div>
+            <div class="match-card">
+              <span class="player">CBlacks</span><span class="vs">vs</span
+              ><span class="player right">Warrax</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Nacho</span><span class="vs">vs</span
+              ><span class="player right">Beckham</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Livingstone</span><span class="vs">vs</span
+              ><span class="player right">Kami</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dan</span><span class="vs">vs</span
+              ><span class="player right">Gargos</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">02</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Warrax</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dave'l</span><span class="vs">vs</span
+              ><span class="player right">Beckham</span>
+            </div>
+            <div class="match-card">
+              <span class="player">CBlacks</span><span class="vs">vs</span
+              ><span class="player right">Kami</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Nacho</span><span class="vs">vs</span
+              ><span class="player right">Gargos</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Livingstone</span><span class="vs">vs</span
+              ><span class="player right">Dan</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">03</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Beckham</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Warrax</span><span class="vs">vs</span
+              ><span class="player right">Kami</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dave'l</span><span class="vs">vs</span
+              ><span class="player right">Gargos</span>
+            </div>
+            <div class="match-card">
+              <span class="player">CBlacks</span><span class="vs">vs</span
+              ><span class="player right">Dan</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Nacho</span><span class="vs">vs</span
+              ><span class="player right">Livingstone</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">04</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Kami</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Beckham</span><span class="vs">vs</span
+              ><span class="player right">Gargos</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Warrax</span><span class="vs">vs</span
+              ><span class="player right">Dan</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dave'l</span><span class="vs">vs</span
+              ><span class="player right">Livingstone</span>
+            </div>
+            <div class="match-card">
+              <span class="player">CBlacks</span><span class="vs">vs</span
+              ><span class="player right">Nacho</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">05</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Gargos</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Kami</span><span class="vs">vs</span
+              ><span class="player right">Dan</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Beckham</span><span class="vs">vs</span
+              ><span class="player right">Livingstone</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Warrax</span><span class="vs">vs</span
+              ><span class="player right">Nacho</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dave'l</span><span class="vs">vs</span
+              ><span class="player right">CBlacks</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">06</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Dan</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Gargos</span><span class="vs">vs</span
+              ><span class="player right">Livingstone</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Kami</span><span class="vs">vs</span
+              ><span class="player right">Nacho</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Beckham</span><span class="vs">vs</span
+              ><span class="player right">CBlacks</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Warrax</span><span class="vs">vs</span
+              ><span class="player right">Dave'l</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">07</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Livingstone</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dan</span><span class="vs">vs</span
+              ><span class="player right">Nacho</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Gargos</span><span class="vs">vs</span
+              ><span class="player right">CBlacks</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Kami</span><span class="vs">vs</span
+              ><span class="player right">Dave'l</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Beckham</span><span class="vs">vs</span
+              ><span class="player right">Warrax</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">08</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">Nacho</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Livingstone</span><span class="vs">vs</span
+              ><span class="player right">CBlacks</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dan</span><span class="vs">vs</span
+              ><span class="player right">Dave'l</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Gargos</span><span class="vs">vs</span
+              ><span class="player right">Warrax</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Kami</span><span class="vs">vs</span
+              ><span class="player right">Beckham</span>
+            </div>
+          </div>
+        </div>
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-label">Tour</span><span class="tour-num">09</span>
+            <div class="tour-line"></div>
+          </div>
+          <div class="matchs-grid">
+            <div class="match-card">
+              <span class="player">Eclairomax</span><span class="vs">vs</span
+              ><span class="player right">CBlacks</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Nacho</span><span class="vs">vs</span
+              ><span class="player right">Dave'l</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Livingstone</span><span class="vs">vs</span
+              ><span class="player right">Warrax</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Dan</span><span class="vs">vs</span
+              ><span class="player right">Beckham</span>
+            </div>
+            <div class="match-card">
+              <span class="player">Gargos</span><span class="vs">vs</span
+              ><span class="player right">Kami</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 Kuro-Exodus — Tekken League. Tous droits réservés.</p>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-title">Résultat du match</div>
+        <div class="modal-subtitle">Sélectionne le score de chaque joueur</div>
+        <div class="modal-matchup">
+          <div class="modal-player">
+            <span class="modal-player-name" id="modal-p1-name">—</span>
+            <div class="score-btns" id="btns-p1">
+              <button class="score-btn" onclick="selectScore('p1', 0)">
+                0
+              </button>
+              <button class="score-btn" onclick="selectScore('p1', 1)">
+                1
+              </button>
+              <button class="score-btn" onclick="selectScore('p1', 2)">
+                2
+              </button>
+            </div>
+          </div>
+          <div class="modal-vs">VS</div>
+          <div class="modal-player">
+            <span class="modal-player-name" id="modal-p2-name">—</span>
+            <div class="score-btns" id="btns-p2">
+              <button class="score-btn" onclick="selectScore('p2', 0)">
+                0
+              </button>
+              <button class="score-btn" onclick="selectScore('p2', 1)">
+                1
+              </button>
+              <button class="score-btn" onclick="selectScore('p2', 2)">
+                2
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-error" id="modal-error"></div>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+          <button
+            class="btn-reset"
+            onclick="resetScore()"
+            id="btn-reset"
+            style="display: none"
+          >
+            Effacer
+          </button>
+          <button class="btn-confirm" onclick="confirmScore()">
+            Confirmer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
