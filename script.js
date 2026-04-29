@@ -5,12 +5,11 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  onSnapshot,
   collection,
+  doc,
+  getFirestore,
+  onSnapshot,
+  setDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ── CONFIG FIREBASE ──────────────────────────────────────────
@@ -143,7 +142,7 @@ function renderAllCells() {
     const key = matchKey(row, col);
     const match = scores[key];
 
-    if (!match) {
+    if (!match || match.deleted || match.s1 === null || match.s2 === null) {
       td.querySelector(".score-display").textContent = "—";
       td.querySelector(".score-display").className = "score-display";
       td.classList.remove("filled");
