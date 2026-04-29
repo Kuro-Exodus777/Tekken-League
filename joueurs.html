@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
       rel="stylesheet"
     />
+
     <style>
       :root {
         --gold: #c9a84c;
@@ -367,6 +368,158 @@
         color: var(--gold-dim);
         letter-spacing: 2px;
         text-transform: uppercase;
+      }
+
+      @media (max-width: 768px) {
+        /* ── NAVBAR ── */
+        nav {
+          flex-direction: column;
+          height: auto;
+          padding: 1rem 1.5rem;
+          gap: 0.8rem;
+        }
+
+        nav ul {
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        nav ul li a {
+          font-size: 0.8rem;
+        }
+
+        /* ── HERO ── */
+        .hero {
+          padding: 60px 20px;
+          min-height: auto;
+        }
+
+        .hero-bg-text {
+          font-size: clamp(80px, 30vw, 140px);
+        }
+
+        .hero-title {
+          font-size: clamp(48px, 15vw, 72px);
+          letter-spacing: 4px;
+        }
+
+        .hero-stats {
+          gap: 16px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .stat-divider {
+          display: none;
+        }
+
+        .hero-links {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .btn-primary,
+        .btn-outline {
+          width: 100%;
+          text-align: center;
+          padding: 14px 20px;
+        }
+
+        /* ── INNER NAV ── */
+        .inner-nav {
+          gap: 20px;
+          flex-wrap: wrap;
+          padding: 12px 1rem;
+        }
+
+        .inner-nav a {
+          font-size: 0.8rem;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+          padding: 50px 20px;
+        }
+
+        .section-dark .section-header {
+          padding: 0 20px;
+        }
+
+        .section-title {
+          font-size: clamp(28px, 8vw, 40px);
+        }
+
+        /* ── PHASES ── */
+        .phase-card {
+          flex-direction: column;
+          gap: 16px;
+          padding: 24px 20px;
+        }
+
+        .phase-number {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding-right: 0;
+          padding-bottom: 12px;
+          font-size: 2.5rem;
+        }
+
+        .phase-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .promo-relégation {
+          grid-template-columns: 1fr;
+        }
+
+        /* ── RÈGLEMENT ── */
+        .rules-grid {
+          grid-template-columns: 1fr 1fr;
+          padding: 0 20px;
+        }
+
+        /* ── PRIZE POOL ── */
+        .prize-container {
+          grid-template-columns: 1fr;
+        }
+
+        /* ── BRACKET TABLE ── */
+        .bracket-table-wrap {
+          overflow-x: auto;
+        }
+
+        .bracket-table {
+          font-size: 0.8rem;
+          min-width: 400px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+          padding: 24px 20px;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ── TRÈS PETIT ÉCRAN ── */
+      @media (max-width: 480px) {
+        .rules-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-badge {
+          font-size: 0.65rem;
+          letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+          font-size: 0.9rem;
+        }
+
+        .stat-number {
+          font-size: 1.8rem;
+        }
       }
     </style>
   </head>
